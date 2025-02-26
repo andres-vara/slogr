@@ -58,6 +58,10 @@ func SetLevel(level slog.Level) {
 	defaultLogger.SetLevel(level)
 }
 
+func GetLevel() slog.Level {
+	return defaultLogger.GetLevel()
+}
+
 type Logger struct {
 	// level is the minimum level output by this Logger
 	level slog.Level
