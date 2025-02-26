@@ -55,6 +55,7 @@ func SetOutput(output io.Writer) {
 
 // SetLevel sets the level for the default logger
 func SetLevel(level slog.Level) {
+	defaultLogger.SetLevel(level)
 }
 
 type Logger struct {
