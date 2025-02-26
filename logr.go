@@ -34,9 +34,9 @@ type Options struct {
 
 func DefaultOptions() *Options {
 	return &Options{
-		Level: slog.LevelInfo,
-		AddLevelPrefix: true,
-		HandlerType: HandlerTypeText,
+		Level:          slog.LevelInfo,
+		AddLevelPrefix: false,
+		HandlerType:    HandlerTypeText,
 		HandlerOptions: &slog.HandlerOptions{
 			Level: slog.LevelInfo,
 			ReplaceAttr: func(groups []string, a slog.Attr) slog.Attr {
@@ -96,23 +96,23 @@ func New(output io.Writer, opts *Options) *Logger {
 		handler = opts.CustomHandler
 	} else {
 		switch opts.HandlerType {
-			case HandlerTypeJSON:
-				handler = slog.NewJSONHandler(output, opts.HandlerOptions)
-			default:
-				handler = slog.NewTextHandler(output, opts.HandlerOptions)
+		case HandlerTypeJSON:
+			handler = slog.NewJSONHandler(output, opts.HandlerOptions)
+		default:
+			handler = slog.NewTextHandler(output, opts.HandlerOptions)
 		}
 	}
-	
+
 	if opts.AddLevelPrefix {
 		handler = &levelPrefixHandler{handler}
 	}
 
 	return &Logger{
-		level: opts.Level,
+		level:                        opts.Level,
 		shouldPreficMessageWithLevel: opts.AddLevelPrefix,
-		handlerType: opts.HandlerType,
-		slogger: slog.New(handler),
-		writerType: output,
+		handlerType:                  opts.HandlerType,
+		slogger:                      slog.New(handler),
+		writerType:                   output,
 	}
 }
 
@@ -132,7 +132,7 @@ func (logger *Logger) SetHandler(output io.Writer, handlerType HandlerType, opts
 			Level: logger.level,
 		}
 	}
-	
+
 	var handler slog.Handler
 	switch handlerType {
 	case HandlerTypeJSON:
@@ -140,11 +140,11 @@ func (logger *Logger) SetHandler(output io.Writer, handlerType HandlerType, opts
 	default:
 		handler = slog.NewTextHandler(output, opts)
 	}
-	
+
 	if logger.shouldPreficMessageWithLevel {
 		handler = &levelPrefixHandler{handler}
 	}
-	
+
 	logger.slogger = slog.New(handler)
 }
 
@@ -169,7 +169,6 @@ func (logger *Logger) GetLevel() slog.Level {
 func (logger *Logger) GetHandlerType() HandlerType {
 	return logger.handlerType
 }
-
 
 // SetCustomHandler allows setting a custom handler
 func (logger *Logger) SetCustomHandler(handler slog.Handler) {
@@ -221,13 +220,12 @@ func (logger *Logger) Errorf(ctx context.Context, format string, args ...any) {
 }
 
 func (logger *Logger) Fatal(ctx context.Context, message string) {
-	logger.Log(ctx, slog.LevelError + 4, message)
+	logger.Log(ctx, slog.LevelError+4, message)
 }
 
 func (logger *Logger) Fatalf(ctx context.Context, format string, args ...any) {
-	logger.Logf(ctx, slog.LevelError + 4, format, args...)
+	logger.Logf(ctx, slog.LevelError+4, format, args...)
 }
-
 
 func Log(ctx context.Context, level slog.Level, message string) {
 	defaultLogger.Log(ctx, level, message)
@@ -276,5 +274,3 @@ func Fatal(ctx context.Context, message string) {
 func Fatalf(ctx context.Context, format string, args ...any) {
 	defaultLogger.Fatalf(ctx, format, args...)
 }
-
-
