@@ -1,4 +1,4 @@
-# logr
+# slogr
 
 A structured logging package built on Go's [slog](https://pkg.go.dev/log/slog) with enhanced features and simpler configuration.
 

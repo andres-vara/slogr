@@ -1,4 +1,4 @@
-package logr
+package slogr
 
 import (
 	"bytes"
