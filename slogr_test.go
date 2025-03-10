@@ -178,8 +178,8 @@ func TestLogger_SetThreshold(t *testing.T) {
 	logger.Infof(ctx, "this is info %d", 1)
 	logger.Warn(ctx, "this is warn")
 	logger.Warnf(ctx, "this is warn %d", 1)
-	// logger.Errorf(ctx, "this is error %d", 1)
-	logger.Error(ctx, "this is error")
+	logger.Errorf(ctx, "this is error %d", 1)
+	// logger.Error(ctx, "this is error", 1)
 	output := buf.String()
 	t.Logf("output: %s", output)
 	if numberOfNewLines := strings.Count(output, "\n"); numberOfNewLines != 1 {

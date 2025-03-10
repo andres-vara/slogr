@@ -2,6 +2,7 @@ package slogr
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"log/slog"
 	"os"
@@ -183,8 +184,10 @@ func (logger *Logger) Log(ctx context.Context, level slog.Level, msg string) {
 	logger.slogger.Log(ctx, level, msg)
 }
 
-func (logger *Logger) Logf(ctx context.Context, level slog.Level, msg string, args ...any) {
-	logger.slogger.Log(ctx, level, msg, args...)
+func (logger *Logger) Logf(ctx context.Context, level slog.Level, format string, args ...any) {
+	// Format the message with fmt.Sprintf before passing to the logger
+	formattedMsg := fmt.Sprintf(format, args...)
+	logger.slogger.Log(ctx, level, formattedMsg)
 }
 
 func (logger *Logger) Debug(ctx context.Context, msg string) {
