@@ -179,20 +179,10 @@ func TestLogger_SetThreshold(t *testing.T) {
 	logger.Warn(ctx, "this is warn")
 	logger.Warnf(ctx, "this is warn %d", 1)
 	logger.Errorf(ctx, "this is error %d", 1)
-	// logger.Error(ctx, "this is error", 1)
 	output := buf.String()
-	t.Logf("output: %s", output)
 	if numberOfNewLines := strings.Count(output, "\n"); numberOfNewLines != 1 {
 		t.Error("expected 1 newline, got", numberOfNewLines)
 	}
-	// level := logger.GetLevel()
-	// if level != slog.LevelError {
-	// 	t.Errorf("expected level to be %s, got %s", slog.LevelError, level)
-	// }
-	// handlerType := logger.GetHandlerType()
-	// if handlerType != HandlerTypeText {
-	// 	t.Errorf("expected handler type to be HandlertText, got %T", handlerType)
-	// }
 }
 
 func TestLogger_SetOutput(t *testing.T) {

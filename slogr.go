@@ -180,8 +180,8 @@ func (logger *Logger) SetCustomHandler(handler slog.Handler) {
 	logger.slogger = slog.New(handler)
 }
 
-func (logger *Logger) Log(ctx context.Context, level slog.Level, msg string) {
-	logger.slogger.Log(ctx, level, msg)
+func (logger *Logger) Log(ctx context.Context, level slog.Level, msg string, args ...any) {
+	logger.slogger.Log(ctx, level, msg, args...)
 }
 
 func (logger *Logger) Logf(ctx context.Context, level slog.Level, format string, args ...any) {
@@ -190,88 +190,88 @@ func (logger *Logger) Logf(ctx context.Context, level slog.Level, format string,
 	logger.slogger.Log(ctx, level, formattedMsg)
 }
 
-func (logger *Logger) Debug(ctx context.Context, msg string) {
-	logger.Log(ctx, slog.LevelDebug, msg)
+func (logger *Logger) Debug(ctx context.Context, msg string, args ...any) {
+	logger.Log(ctx, slog.LevelDebug, msg, args...)
 }
 
-func (logger *Logger) Debugf(ctx context.Context, msg string, args ...any) {
-	logger.Logf(ctx, slog.LevelDebug, msg, args...)
+func (logger *Logger) Debugf(ctx context.Context, format string, args ...any) {
+	logger.Logf(ctx, slog.LevelDebug, format, args...)
 }
 
-func (logger *Logger) Info(ctx context.Context, message string) {
-	logger.Log(ctx, slog.LevelInfo, message)
+func (logger *Logger) Info(ctx context.Context, msg string, args ...any) {
+	logger.Log(ctx, slog.LevelInfo, msg, args...)
 }
 
 func (logger *Logger) Infof(ctx context.Context, format string, args ...any) {
 	logger.Logf(ctx, slog.LevelInfo, format, args...)
 }
 
-func (logger *Logger) Warn(ctx context.Context, message string) {
-	logger.Log(ctx, slog.LevelWarn, message)
+func (logger *Logger) Warn(ctx context.Context, msg string, args ...any) {
+	logger.Log(ctx, slog.LevelWarn, msg, args...)
 }
 
 func (logger *Logger) Warnf(ctx context.Context, format string, args ...any) {
 	logger.Logf(ctx, slog.LevelWarn, format, args...)
 }
 
-func (logger *Logger) Error(ctx context.Context, message string) {
-	logger.Log(ctx, slog.LevelError, message)
+func (logger *Logger) Error(ctx context.Context, msg string, args ...any) {
+	logger.Log(ctx, slog.LevelError, msg, args...)
 }
 
 func (logger *Logger) Errorf(ctx context.Context, format string, args ...any) {
 	logger.Logf(ctx, slog.LevelError, format, args...)
 }
 
-func (logger *Logger) Fatal(ctx context.Context, message string) {
-	logger.Log(ctx, slog.LevelError+4, message)
+func (logger *Logger) Fatal(ctx context.Context, msg string, args ...any) {
+	logger.Log(ctx, slog.LevelError+4, msg, args...)
 }
 
 func (logger *Logger) Fatalf(ctx context.Context, format string, args ...any) {
 	logger.Logf(ctx, slog.LevelError+4, format, args...)
 }
 
-func Log(ctx context.Context, level slog.Level, message string) {
-	defaultLogger.Log(ctx, level, message)
+func Log(ctx context.Context, level slog.Level, msg string, args ...any) {
+	defaultLogger.Log(ctx, level, msg, args...)
 }
 
-func Logf(ctx context.Context, level slog.Level, message string, args ...any) {
-	defaultLogger.Logf(ctx, level, message, args...)
+func Logf(ctx context.Context, level slog.Level, format string, args ...any) {
+	defaultLogger.Logf(ctx, level, format, args...)
 }
 
-func Debug(ctx context.Context, message string) {
-	defaultLogger.Debug(ctx, message)
+func Debug(ctx context.Context, msg string, args ...any) {
+	defaultLogger.Debug(ctx, msg, args...)
 }
 
 func Debugf(ctx context.Context, format string, args ...any) {
 	defaultLogger.Debugf(ctx, format, args...)
 }
 
-func Info(ctx context.Context, message string) {
-	defaultLogger.Info(ctx, message)
+func Info(ctx context.Context, msg string, args ...any) {
+	defaultLogger.Info(ctx, msg, args...)
 }
 
 func Infof(ctx context.Context, format string, args ...any) {
 	defaultLogger.Infof(ctx, format, args...)
 }
 
-func Warn(ctx context.Context, message string) {
-	defaultLogger.Warn(ctx, message)
+func Warn(ctx context.Context, msg string, args ...any) {
+	defaultLogger.Warn(ctx, msg, args...)
 }
 
 func Warnf(ctx context.Context, format string, args ...any) {
 	defaultLogger.Warnf(ctx, format, args...)
 }
 
-func Error(ctx context.Context, message string) {
-	defaultLogger.Error(ctx, message)
+func Error(ctx context.Context, msg string, args ...any) {
+	defaultLogger.Error(ctx, msg, args...)
 }
 
 func Errorf(ctx context.Context, format string, args ...any) {
 	defaultLogger.Errorf(ctx, format, args...)
 }
 
-func Fatal(ctx context.Context, message string) {
-	defaultLogger.Fatal(ctx, message)
+func Fatal(ctx context.Context, msg string, args ...any) {
+	defaultLogger.Fatal(ctx, msg, args...)
 }
 
 func Fatalf(ctx context.Context, format string, args ...any) {
